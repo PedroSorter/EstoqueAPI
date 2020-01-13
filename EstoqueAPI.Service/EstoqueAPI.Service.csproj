@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EstoqueAPI.Domain\EstoqueAPI.Domain.csproj" />
+    <ProjectReference Include="..\EstoqueAPI.Infraestrutura\EstoqueAPI.Infraestrutura.csproj" />
+  </ItemGroup>
+
+</Project>
