@@ -1,16 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Dados
 {
   public class Contexto : DbContext
   {
+    public Contexto(DbContextOptions<Contexto> contextOptions) : base(contextOptions) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder
-          .UseSqlite(@"Estoque.db;");
+          .UseSqlite("ConexaoDefault", b => b.MigrationsAssembly("EstoqueAPI.WebApi"));
     }
 
     public DbSet<Produto> Produto { get; set; }
