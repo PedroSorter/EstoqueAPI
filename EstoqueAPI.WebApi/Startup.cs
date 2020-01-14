@@ -38,6 +38,13 @@ namespace EstoqueAPI.WebApi
       services.AddTransient<IProdutoService, ProdutoService>();
       services.AddDbContext<Contexto>();
       services.AddControllers();
+      services.AddCors(options =>
+      {
+        options.AddPolicy("EnableCORS", builder =>
+        {
+          builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().Build();
+        });
+      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +58,8 @@ namespace EstoqueAPI.WebApi
       app.UseHttpsRedirection();
 
       app.UseRouting();
+
+      app.UseCors("EnableCORS");
 
       app.UseAuthorization();
 

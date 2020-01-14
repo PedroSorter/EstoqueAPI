@@ -1,13 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EstoqueAPI.Dados\EstoqueAPI.Dados.csproj" />
     <ProjectReference Include="..\EstoqueAPI.Domain\EstoqueAPI.Domain.csproj" />
-    <ProjectReference Include="..\EstoqueAPI.Infraestrutura\EstoqueAPI.Infraestrutura.csproj" />
     <ProjectReference Include="..\EstoqueAPI.Repository\EstoqueAPI.Repository.csproj" />
     <ProjectReference Include="..\EstoqueAPI.Service\EstoqueAPI.Service.csproj" />
     <ProjectReference Include="..\EstoqueAPI.UnitOfWork\EstoqueAPI.UnitOfWork.csproj" />

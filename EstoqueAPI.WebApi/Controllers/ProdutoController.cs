@@ -25,9 +25,9 @@ namespace EstoqueAPI.WebApi.Controllers
     }
 
     [HttpGet("GetProduto/{id}")]
-    public IEnumerable<ProdutoModel> GetProduto()
+    public ProdutoModel GetProduto(Guid Id)
     {
-      return produtoService.ListaProdutos().ToList();
+      return produtoService.Produto(Id);
     }
 
     [HttpPost("CreateProduto")]
