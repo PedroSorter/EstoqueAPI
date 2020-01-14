@@ -15,4 +15,4 @@ Exemplo de Sistema para estoque de produtos
   
   -Uma camada de presentation para realizar a comunicação a Front-end com total desconhecimento da nossa camada de dados para manter um desacoplamento desejável. 
   
-  Sistema pode ainda contar como evolutivas em questão de versionamento, autenticação e tratamento específico de exceção que foram deixados de lado pela simplicidade da história do usuário. 
+  Sistema pode ainda contar como evolutivas em questão de versionamento, autenticação e tratamento específico de exceção que foram deixados de lado pela simplicidade da história do usuário, swagger para teste da API e integrações para CD E CI com unidades de teste como  SonarQube, Selenium e etc. 
