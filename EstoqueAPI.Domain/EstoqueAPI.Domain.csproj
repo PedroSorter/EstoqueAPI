@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EstoqueAPI.Dados\EstoqueAPI.Dados.csproj" />
     <ProjectReference Include="..\EstoqueAPI.Infraestrutura\EstoqueAPI.Infraestrutura.csproj" />
   </ItemGroup>

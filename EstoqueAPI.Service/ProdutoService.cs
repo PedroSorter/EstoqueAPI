@@ -49,13 +49,16 @@ namespace EstoqueAPI.Service
       return null;
     }
 
-    public void DeletarProduto(Guid Id)
+    public ProdutoModel DeletarProduto(Guid Id)
     {
-      var produto = this.produtoRepository.GetById(Id);
-      if (produto != null)
+      var model = this.produtoRepository.GetById(Id);
+      if (model != null)
       {
-        this.produtoRepository.Delete(produto);
+        this.produtoRepository.Delete(model);
+        return mapper.Map<Produto, ProdutoModel>(model);
       }
+
+      return null;
     }
 
     public void EditarProduto(ProdutoModel viewModel)
@@ -64,7 +67,7 @@ namespace EstoqueAPI.Service
       if(produto != null)
       {
         var model = mapper.Map<ProdutoModel, Produto>(viewModel);
-        this.produtoRepository.Update(produto);
+        this.produtoRepository.Update(model);
       }
     }
 

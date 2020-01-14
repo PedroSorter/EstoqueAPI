@@ -24,7 +24,7 @@ namespace EstoqueAPI.Infraestrutura
 
     public void Delete(T entity)
     {
-      T existing = this.unitOfWork.Contexto.Set<T>().Find(entity);
+      T existing = this.unitOfWork.Contexto.Set<T>().Find(entity.Id);
       if (existing != null) this.unitOfWork.Contexto.Set<T>().Remove(existing);
       this.unitOfWork.Commit();
     }
@@ -41,7 +41,7 @@ namespace EstoqueAPI.Infraestrutura
 
     public T GetById(Guid? id)
     {
-      return this.unitOfWork.Contexto.Set<T>().Where(x => x.Id == id).SingleOrDefault();
+      return this.unitOfWork.Contexto.Set<T>().AsNoTracking().Where(x => x.Id == id).SingleOrDefault();
     }
 
     public T GetBySpecification(ISpecification<T> specification)
