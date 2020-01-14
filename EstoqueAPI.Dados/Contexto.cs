@@ -5,11 +5,11 @@ namespace Dados
 {
   public class Contexto : DbContext
   {
-    public Contexto(DbContextOptions<Contexto> contextOptions) : base(contextOptions) { }
+    public Contexto(DbContextOptions<Contexto> dbContextOptions) : base (dbContextOptions) { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       optionsBuilder
-          .UseSqlite("ConexaoDefault", b => b.MigrationsAssembly("EstoqueAPI.WebApi"));
+          .UseSqlite(@"DataSource=Estoque.db;", b => b.MigrationsAssembly("EstoqueAPI.WebApi"));
     }
 
     public DbSet<Produto> Produto { get; set; }

@@ -24,32 +24,32 @@ namespace EstoqueAPI.WebApi.Migrations
             migrationBuilder.InsertData(
                 table: "Produto",
                 columns: new[] { "Id", "Nome", "Quantidade", "Valor" },
-                values: new object[] { new Guid("be1ee539-1f61-45f4-a7bf-97a140a1a29b"), "RTX 2060", 50, 2000.00m });
+                values: new object[] { new Guid("67fa5aaf-579e-4086-876a-846a5e3264a7"), "RTX 2060", 50, 2000.00m });
 
             migrationBuilder.InsertData(
                 table: "Produto",
                 columns: new[] { "Id", "Nome", "Quantidade", "Valor" },
-                values: new object[] { new Guid("62f24c8d-f823-4aff-86a6-57373cf0028d"), "RTX 2060 SUPER", 60, 2500.00m });
+                values: new object[] { new Guid("b7a7294b-9d41-4cf5-b778-73ed6ee12597"), "RTX 2060 SUPER", 60, 2500.00m });
 
             migrationBuilder.InsertData(
                 table: "Produto",
                 columns: new[] { "Id", "Nome", "Quantidade", "Valor" },
-                values: new object[] { new Guid("57f6ce8a-1e54-4d30-9332-d9c5cbf186ce"), "RTX 2070", 10, 3000.00m });
+                values: new object[] { new Guid("9ef9b714-5a63-492b-95a2-2e7fedf350b9"), "RTX 2070", 10, 3000.00m });
 
             migrationBuilder.InsertData(
                 table: "Produto",
                 columns: new[] { "Id", "Nome", "Quantidade", "Valor" },
-                values: new object[] { new Guid("7415f8ce-e427-4a87-9a13-9be812ddaf4b"), "RTX 2070 SUPER", 8, 3500.00m });
+                values: new object[] { new Guid("9f823f33-1655-46f8-9858-cf0387292ac3"), "RTX 2070 SUPER", 8, 3500.00m });
 
             migrationBuilder.InsertData(
                 table: "Produto",
                 columns: new[] { "Id", "Nome", "Quantidade", "Valor" },
-                values: new object[] { new Guid("1aad9964-b9e3-4f46-99e2-6ad12fa1779f"), "RTX 2080 SUPER", 5, 4000.00m });
+                values: new object[] { new Guid("bb414e49-3ee3-4221-9475-9062f4e95a82"), "RTX 2080 SUPER", 5, 4000.00m });
 
             migrationBuilder.InsertData(
                 table: "Produto",
                 columns: new[] { "Id", "Nome", "Quantidade", "Valor" },
-                values: new object[] { new Guid("dbc4c222-4b5a-4f41-bffe-90cffb20b781"), "RTX 2080", 1, 6000.00m });
+                values: new object[] { new Guid("343a7faf-1657-48fd-912e-af42e996e146"), "RTX 2080", 1, 6000.00m });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

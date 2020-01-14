@@ -4,8 +4,9 @@ using System.Text;
 
 namespace EstoqueAPI.Domain.Modelo
 {
-  class ProdutoModel
+  public class ProdutoModel
   {
+    public Guid Id { get; set; }
     public string Nome { get; set; }
 
     public string Quantidade { get; set; }

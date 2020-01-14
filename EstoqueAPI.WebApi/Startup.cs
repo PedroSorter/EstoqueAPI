@@ -27,7 +27,7 @@ namespace EstoqueAPI.WebApi
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddDbContext<Contexto>(a => a.UseSqlite(Configuration.GetConnectionString("ConexaoDefault")));
+      services.AddDbContext<Contexto>();
       services.AddControllers();
     }
 

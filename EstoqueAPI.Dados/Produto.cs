@@ -19,6 +19,7 @@ namespace Dados
       else
       {
         this.Nome = nome;
+        this.Id = Guid.NewGuid();
       }
     }
   }

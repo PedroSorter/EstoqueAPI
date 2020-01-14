@@ -1,4 +1,6 @@
-﻿using Dados;
+﻿using AutoMapper;
+using Dados;
+using EstoqueAPI.Domain.Modelo;
 using EstoqueAPI.Domain.Repository;
 using EstoqueAPI.Domain.Service;
 using EstoqueAPI.Domain.Specification;
@@ -13,9 +15,26 @@ namespace EstoqueAPI.Service
   public class ProdutoService : BaseService<Produto>, IProdutoService
   {
     private readonly IProdutoRepository produtoRepository;
-
+    private IMapper mapper; 
     public ProdutoService(IProdutoRepository produtoRepository) : base (produtoRepository)
     {
+      var config = new MapperConfiguration(cfg =>
+      {
+        cfg.CreateMap<ProdutoModel, Produto>()
+            .ForMember(dto => dto.Id, map => map.MapFrom(source => source.Id))
+            .ForMember(dto => dto.Nome, map => map.MapFrom(source => source.Nome))
+            .ForMember(dto => dto.Quantidade, map => map.MapFrom(source => int.Parse(source.Quantidade)))
+            .ForMember(dto => dto.Valor, map => map.MapFrom(source => decimal.Parse(source.Valor)));
+
+        cfg.CreateMap<Produto, ProdutoModel>()
+           .ForMember(dto => dto.Nome, map => map.MapFrom(source => source.Nome))
+           .ForMember(dto => dto.Id, map => map.MapFrom(source => source.Id))
+           .ForMember(dto => dto.Quantidade, map => map.MapFrom(source => source.Quantidade.ToString()))
+           .ForMember(dto => dto.Valor, map => map.MapFrom(source => source.Valor.ToString()));
+      });
+
+      mapper = config.CreateMapper();
+    
       this.produtoRepository = produtoRepository;
     }
 
@@ -28,31 +47,29 @@ namespace EstoqueAPI.Service
       }
     }
 
-    public void EditarProduto(Produto model)
+    public void EditarProduto(ProdutoModel viewModel)
     {
-      var produto = this.produtoRepository.GetById(model.Id);
+      var produto = this.produtoRepository.GetById(viewModel.Id);
       if(produto != null)
       {
-        produto.Nome = model.Nome;
-        produto.Quantidade = model.Quantidade;
-        produto.Valor = model.Valor;
+        var model = mapper.Map<ProdutoModel, Produto>(viewModel);
         this.produtoRepository.Update(produto);
       }
     }
 
-    public IEnumerable<Produto> ListaProdutos()
+    public IEnumerable<ProdutoModel> ListaProdutos()
     {
-      return this.produtoRepository.List();
+      return mapper.Map<IEnumerable<Produto>, IEnumerable<ProdutoModel>>(this.produtoRepository.List());
     }
 
-    public IEnumerable<Produto> ListaProdutosEmEstoque()
+    public IEnumerable<ProdutoModel> ListaProdutosEmEstoque()
     {
-      return this.produtoRepository.ListBySpecfication(ProdutoSpecification.EmEstoque).ToList();
+      return mapper.Map<IEnumerable<Produto>, IEnumerable<ProdutoModel>>(this.produtoRepository.ListBySpecfication(ProdutoSpecification.EmEstoque));
     }
 
-    public Produto Produto(Guid Id)
+    public ProdutoModel Produto(Guid Id)
     {
-      return this.produtoRepository.GetById(Id);
+      return mapper.Map<Produto, ProdutoModel>(this.produtoRepository.GetById(Id));
     }
   }
 }
