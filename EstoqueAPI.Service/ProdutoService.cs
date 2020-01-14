@@ -38,6 +38,17 @@ namespace EstoqueAPI.Service
       this.produtoRepository = produtoRepository;
     }
 
+    public ProdutoModel CriarProduto(ProdutoModel viewModel)
+    {
+      if(viewModel != null)
+      {
+        var model = mapper.Map<ProdutoModel, Produto>(viewModel);
+        this.produtoRepository.Add(model);
+        return viewModel;
+      }
+      return null;
+    }
+
     public void DeletarProduto(Guid Id)
     {
       var produto = this.produtoRepository.GetById(Id);

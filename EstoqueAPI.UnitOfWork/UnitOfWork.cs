@@ -4,7 +4,7 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 
-namespace EstoqueAPI.UnitOfWork
+namespace EstoqueAPI
 {
   public class UnitOfWork<TContext> : IUnitOfWork, IDisposable
            where TContext : Contexto

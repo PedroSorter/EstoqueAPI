@@ -1,8 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Dados;
+using EstoqueAPI.Domain.Repository;
+using EstoqueAPI.Domain.Service;
+using EstoqueAPI.Infraestrutura;
+using EstoqueAPI.Repository;
+using EstoqueAPI.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +33,9 @@ namespace EstoqueAPI.WebApi
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddTransient<IUnitOfWork, UnitOfWork<Contexto>>();
+      services.AddTransient<IProdutoRepository, ProdutoRepositorio>();
+      services.AddTransient<IProdutoService, ProdutoService>();
       services.AddDbContext<Contexto>();
       services.AddControllers();
     }
