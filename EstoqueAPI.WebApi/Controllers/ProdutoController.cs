@@ -18,33 +18,33 @@ namespace EstoqueAPI.WebApi.Controllers
       this.produtoService = produtoService;
     }
 
-    [HttpGet("GetProdutos")]
-    public IEnumerable<ProdutoModel> GetProdutos()
+    [HttpGet("Produtos")]
+    public IEnumerable<ProdutoModel> Produtos()
     {
       return produtoService.ListaProdutos().ToList();
     }
 
-    [HttpGet("GetProduto/{id}")]
-    public ProdutoModel GetProduto(Guid Id)
+    [HttpGet("Produto/{id}")]
+    public ProdutoModel Produto(Guid Id)
     {
       return produtoService.Produto(Id);
     }
 
-    [HttpPost("PostProduto")]
+    [HttpPost("Criar")]
     public IActionResult PostProduto([FromBody]ProdutoModel viewModel)
     {
       this.produtoService.CriarProduto(viewModel);
       return Ok(this.produtoService.CriarProduto(viewModel));
     }
 
-    [HttpDelete("DeletarProduto/{id}")]
-    public IActionResult DeletarProduto(Guid Id)
+    [HttpDelete("Deletar/{id}")]
+    public IActionResult Deletar(Guid Id)
     {
       return Ok(this.produtoService.DeletarProduto(Id));
     }
 
-    [HttpPut("EditarProduto")]
-    public void EditarProduto([FromBody]ProdutoModel viewModel)
+    [HttpPut("Editar")]
+    public void Editar([FromBody]ProdutoModel viewModel)
     {
       this.produtoService.EditarProduto(viewModel);
     }
