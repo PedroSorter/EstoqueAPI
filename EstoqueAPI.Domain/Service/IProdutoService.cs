@@ -12,7 +12,7 @@ namespace EstoqueAPI.Domain.Service
     IEnumerable<ProdutoModel> ListaProdutos();
     IEnumerable<ProdutoModel> ListaProdutosEmEstoque();
     void EditarProduto(ProdutoModel viewModel);
-    ProdutoModel DeletarProduto(Guid Id);
-    ProdutoModel CriarProduto(ProdutoModel viewModel);
+    void DeletarProduto(Guid Id);
+    void CriarProduto(ProdutoNovoModel viewModel);
   }
 }

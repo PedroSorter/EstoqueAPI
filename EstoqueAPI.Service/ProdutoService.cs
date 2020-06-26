@@ -31,6 +31,13 @@ namespace EstoqueAPI.Service
            .ForMember(dto => dto.Id, map => map.MapFrom(source => source.Id))
            .ForMember(dto => dto.Quantidade, map => map.MapFrom(source => source.Quantidade.ToString()))
            .ForMember(dto => dto.Valor, map => map.MapFrom(source => source.Valor.ToString()));
+
+        cfg.CreateMap<ProdutoNovoModel, Produto>()
+            .ForMember(dto => dto.Id, map => Guid.NewGuid())
+            .ForMember(dto => dto.Nome, map => map.MapFrom(source => source.Nome))
+            .ForMember(dto => dto.Quantidade, map => map.MapFrom(source => int.Parse(source.Quantidade)))
+            .ForMember(dto => dto.Valor, map => map.MapFrom(source => decimal.Parse(source.Valor)));
+
       });
 
       mapper = config.CreateMapper();
@@ -38,27 +45,22 @@ namespace EstoqueAPI.Service
       this.produtoRepository = produtoRepository;
     }
 
-    public ProdutoModel CriarProduto(ProdutoModel viewModel)
+    public void CriarProduto(ProdutoNovoModel viewModel)
     {
       if(viewModel != null)
       {
-        var model = mapper.Map<ProdutoModel, Produto>(viewModel);
+        var model = mapper.Map<ProdutoNovoModel, Produto>(viewModel);
         this.produtoRepository.Add(model);
-        return viewModel;
       }
-      return null;
     }
 
-    public ProdutoModel DeletarProduto(Guid Id)
+    public void DeletarProduto(Guid Id)
     {
-      var model = this.produtoRepository.GetById(Id);
-      if (model != null)
+      var produto = this.produtoRepository.GetById(Id);
+      if (produto != null)
       {
-        this.produtoRepository.Delete(model);
-        return mapper.Map<Produto, ProdutoModel>(model);
+        this.produtoRepository.Delete(produto);
       }
-
-      return null;
     }
 
     public void EditarProduto(ProdutoModel viewModel)

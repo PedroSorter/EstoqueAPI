@@ -31,12 +31,12 @@ namespace EstoqueAPI.Infraestrutura
 
     public IEnumerable<T> List()
     {
-      return this.unitOfWork.Contexto.Set<T>().AsEnumerable<T>();
+      return this.unitOfWork.Contexto.Set<T>().AsEnumerable();
     }
 
     public IEnumerable<T> List(Expression<Func<T, bool>> predicate)
     {
-      return this.unitOfWork.Contexto.Set<T>().Where(predicate).AsEnumerable<T>();
+      return this.unitOfWork.Contexto.Set<T>().Where(predicate).AsEnumerable();
     }
 
     public T GetById(Guid? id)

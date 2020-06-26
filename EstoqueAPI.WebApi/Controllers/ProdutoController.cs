@@ -4,6 +4,7 @@ using System.Linq;
 using EstoqueAPI.Domain.Service;
 using Microsoft.AspNetCore.Mvc;
 using EstoqueAPI.Domain.Modelo;
+using System.Threading.Tasks;
 
 namespace EstoqueAPI.WebApi.Controllers
 {
@@ -19,34 +20,45 @@ namespace EstoqueAPI.WebApi.Controllers
     }
 
     [HttpGet("Produtos")]
-    public IEnumerable<ProdutoModel> Produtos()
+    public ActionResult<IEnumerable<ProdutoModel>> Produtos()
     {
-      return produtoService.ListaProdutos().ToList();
+      if (!produtoService.ListaProdutos().ToList().Any())
+      {
+        return NotFound("Nenhum produto encontrado");
+      }
+      return Ok(produtoService.ListaProdutos().ToList());
     }
 
     [HttpGet("Produto/{id}")]
-    public ProdutoModel Produto(Guid Id)
+    public ActionResult<ProdutoModel> Produto(Guid Id)
     {
-      return produtoService.Produto(Id);
+      if (produtoService.Produto(Id) == null)
+      {
+        return NotFound("Produto não encontrado");
+      }
+
+      return Ok(produtoService.Produto(Id));
     }
 
-    [HttpPost("Criar")]
-    public IActionResult PostProduto([FromBody]ProdutoModel viewModel)
+    [HttpPost("Produto")]
+    public IActionResult PostProduto([FromBody]ProdutoNovoModel viewModel)
     {
       this.produtoService.CriarProduto(viewModel);
-      return Ok(this.produtoService.CriarProduto(viewModel));
+      return StatusCode(200);
     }
 
-    [HttpDelete("Deletar/{id}")]
+    [HttpDelete("Produto/{id}")]
     public IActionResult Deletar(Guid Id)
     {
-      return Ok(this.produtoService.DeletarProduto(Id));
+      this.produtoService.DeletarProduto(Id);
+      return StatusCode(200);
     }
 
-    [HttpPut("Editar")]
-    public void Editar([FromBody]ProdutoModel viewModel)
+    [HttpPut("Produto")]
+    public IActionResult Editar([FromBody]ProdutoModel viewModel)
     {
       this.produtoService.EditarProduto(viewModel);
+      return StatusCode(200);
     }
   }
 }

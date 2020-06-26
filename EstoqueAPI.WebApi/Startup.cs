@@ -38,6 +38,12 @@ namespace EstoqueAPI.WebApi
       services.AddTransient<IProdutoService, ProdutoService>();
       services.AddDbContext<Contexto>();
       services.AddControllers();
+      services.AddControllers().AddJsonOptions(options =>
+      {
+        // Use the default property (Pascal) casing.
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+      });
+
       services.AddCors(options =>
       {
         options.AddPolicy("EnableCORS", builder =>
