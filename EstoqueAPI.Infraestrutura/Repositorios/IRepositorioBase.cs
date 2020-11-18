@@ -2,25 +2,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace EstoqueAPI.Infraestrutura
 {
   public interface IRepository<T> where T : ModeloBase
   {
-    T GetById(Guid? id);
+    Task<T> GetById(Guid? id);
 
-    IEnumerable<T> List();
+    Task<IEnumerable<T>> List();
 
-    IEnumerable<T> List(Expression<Func<T, bool>> predicate);
+    Task<IEnumerable<T>> List(Expression<Func<T, bool>> predicate);
 
-    IEnumerable<T> ListBySpecfication(ISpecification<T> specification);
+    Task<IEnumerable<T>> ListBySpecfication(ISpecification<T> specification);
 
-    T GetBySpecification(ISpecification<T> specification);
+    Task<T> GetBySpecification(ISpecification<T> specification);
 
-    void Add(T entity);
+    Task Add(T entity);
 
-    void Delete(T entity);
+    Task Delete(T entity);
 
-    void Update(T entity);
+    Task Update(T entity);
   }
 }

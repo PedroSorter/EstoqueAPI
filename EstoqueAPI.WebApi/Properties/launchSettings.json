@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/produto/GetProdutos",
+      "launchUrl": "api/produto/produtos",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "EstoqueAPI.WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/produto/GetProdutos",
+      "launchUrl": "api/produto/produtos",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

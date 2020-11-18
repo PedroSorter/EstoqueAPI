@@ -3,6 +3,7 @@ using EstoqueAPI.Infraestrutura;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace EstoqueAPI
 {
@@ -20,9 +21,9 @@ namespace EstoqueAPI
     {
       Contexto = context;
     }
-    public void Commit()
+    public async Task Commit()
     {
-      Contexto.SaveChanges();
+      await Contexto.SaveChangesAsync();
     }
 
     public void Dispose()

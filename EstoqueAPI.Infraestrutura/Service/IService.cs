@@ -1,16 +1,16 @@
 ﻿using Dados;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace EstoqueAPI.Infraestrutura
 {
   public interface IService<T> where T : ModeloBase
   {
-    IList<T> GetAll();
-    T GetByID(Guid id);
-    T Create(T modelBase);
-    T Update(T modelBase);
-    void Delete(Guid id);
+    Task<IList<T>> GetAll();
+    Task<T> GetByID(Guid id);
+    Task<T> Create(T modelBase);
+    Task<T> Update(T modelBase);
+    Task Delete(Guid id);
   }
 }

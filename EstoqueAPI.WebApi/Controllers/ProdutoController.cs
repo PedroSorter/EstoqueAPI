@@ -8,57 +8,59 @@ using System.Threading.Tasks;
 
 namespace EstoqueAPI.WebApi.Controllers
 {
-  [Route("api/[controller]")]
-  [ApiController]
-  public class ProdutoController : ControllerBase
-  {
-    private readonly IProdutoService produtoService; 
-
-    public ProdutoController(IProdutoService produtoService)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProdutoController : ControllerBase
     {
-      this.produtoService = produtoService;
-    }
+        private readonly IProdutoService produtoService;
 
-    [HttpGet("Produtos")]
-    public ActionResult<IEnumerable<ProdutoModel>> Produtos()
-    {
-      if (!produtoService.ListaProdutos().ToList().Any())
-      {
-        return NotFound("Nenhum produto encontrado");
-      }
-      return Ok(produtoService.ListaProdutos().ToList());
-    }
+        public ProdutoController(IProdutoService produtoService)
+        {
+            this.produtoService = produtoService;
+        }
 
-    [HttpGet("Produto/{id}")]
-    public ActionResult<ProdutoModel> Produto(Guid Id)
-    {
-      if (produtoService.Produto(Id) == null)
-      {
-        return NotFound("Produto não encontrado");
-      }
+        [HttpGet("Produtos")]
+        public async Task<ActionResult<IEnumerable<ProdutoModel>>> Produtos()
+        {
+          var listaProdutos = await produtoService.ListaProdutos();
+          if (!listaProdutos.Any())
+            {
+                return NotFound("Nenhum produto encontrado");
+            }
+            return Ok(listaProdutos);
+        }
 
-      return Ok(produtoService.Produto(Id));
-    }
+        [HttpGet("Produto/{id}")]
+        public async Task<ActionResult<ProdutoModel>> Produto(Guid Id)
+        {
+            var produto = await produtoService.Produto(Id);
+            if (produto == null)
+            {
+                return NotFound("Produto não encontrado");
+            }
 
-    [HttpPost("Produto")]
-    public IActionResult PostProduto([FromBody]ProdutoNovoModel viewModel)
-    {
-      this.produtoService.CriarProduto(viewModel);
-      return StatusCode(200);
-    }
+            return Ok(produto);
+        }
 
-    [HttpDelete("Produto/{id}")]
-    public IActionResult Deletar(Guid Id)
-    {
-      this.produtoService.DeletarProduto(Id);
-      return StatusCode(200);
-    }
+        [HttpPost("Produto")]
+        public async Task<IActionResult> PostProduto([FromBody]ProdutoNovoModel viewModel)
+        {
+            await this.produtoService.CriarProduto(viewModel);
+            return StatusCode(200);
+        }
 
-    [HttpPut("Produto")]
-    public IActionResult Editar([FromBody]ProdutoModel viewModel)
-    {
-      this.produtoService.EditarProduto(viewModel);
-      return StatusCode(200);
+        [HttpDelete("Produto/{id}")]
+        public async Task<IActionResult> Deletar(Guid Id)
+        {
+            await this.produtoService.DeletarProduto(Id);
+            return StatusCode(200);
+        }
+
+        [HttpPut("Produto")]
+        public async Task<IActionResult> Editar([FromBody]ProdutoModel viewModel)
+        {
+            await this.produtoService.EditarProduto(viewModel);
+            return StatusCode(200);
+        }
     }
-  }
 }

@@ -3,16 +3,17 @@ using EstoqueAPI.Domain.Modelo;
 using EstoqueAPI.Infraestrutura;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EstoqueAPI.Domain.Service
 {
-  public interface IProdutoService : IService<Produto>
-  {
-    ProdutoModel Produto(Guid Id);
-    IEnumerable<ProdutoModel> ListaProdutos();
-    IEnumerable<ProdutoModel> ListaProdutosEmEstoque();
-    void EditarProduto(ProdutoModel viewModel);
-    void DeletarProduto(Guid Id);
-    void CriarProduto(ProdutoNovoModel viewModel);
-  }
+    public interface IProdutoService
+    {
+        Task<ProdutoModel> Produto(Guid Id);
+        Task<IEnumerable<ProdutoModel>> ListaProdutos();
+        Task<IEnumerable<ProdutoModel>> ListaProdutosEmEstoque();
+        Task EditarProduto(ProdutoModel viewModel);
+        Task DeletarProduto(Guid Id);
+        Task CriarProduto(ProdutoNovoModel viewModel);
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using Dados;
+using System.Threading.Tasks;
 
 namespace EstoqueAPI.Infraestrutura
 {
@@ -6,6 +7,6 @@ namespace EstoqueAPI.Infraestrutura
   {
     Contexto Contexto { get; }
 
-    void Commit();
+    Task Commit();
   }
 }

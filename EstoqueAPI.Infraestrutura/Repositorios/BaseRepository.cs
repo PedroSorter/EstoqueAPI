@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace EstoqueAPI.Infraestrutura
 {
@@ -16,48 +17,48 @@ namespace EstoqueAPI.Infraestrutura
       this.unitOfWork = unitOfWork;
     }
 
-    public void Add(T entity)
+    public async Task Add(T entity)
     {
-      this.unitOfWork.Contexto.Set<T>().Add(entity);
-      this.unitOfWork.Commit();
+      await this.unitOfWork.Contexto.Set<T>().AddAsync(entity);
+      await this.unitOfWork.Commit();
     }
 
-    public void Delete(T entity)
+    public async Task Delete(T entity)
     {
-      T existing = this.unitOfWork.Contexto.Set<T>().Find(entity.Id);
+      T existing = await this.unitOfWork.Contexto.Set<T>().FindAsync(entity.Id);
       if (existing != null) this.unitOfWork.Contexto.Set<T>().Remove(existing);
-      this.unitOfWork.Commit();
+      await this.unitOfWork.Commit();
     }
 
-    public IEnumerable<T> List()
+    public async Task<IEnumerable<T>> List()
     {
-      return this.unitOfWork.Contexto.Set<T>().AsEnumerable();
+      return await this.unitOfWork.Contexto.Set<T>().ToListAsync();
     }
 
-    public IEnumerable<T> List(Expression<Func<T, bool>> predicate)
+    public async Task<IEnumerable<T>> List(Expression<Func<T, bool>> predicate)
     {
-      return this.unitOfWork.Contexto.Set<T>().Where(predicate).AsEnumerable();
+      return await this.unitOfWork.Contexto.Set<T>().Where(predicate).ToListAsync();
     }
 
-    public T GetById(Guid? id)
+    public async Task<T> GetById(Guid? id)
     {
-      return this.unitOfWork.Contexto.Set<T>().AsNoTracking().Where(x => x.Id == id).SingleOrDefault();
+      return await this.unitOfWork.Contexto.Set<T>().AsNoTracking().Where(x => x.Id == id).SingleOrDefaultAsync();
     }
 
-    public T GetBySpecification(ISpecification<T> specification)
+    public async Task<T> GetBySpecification(ISpecification<T> specification)
     {
-      return this.unitOfWork.Contexto.Set<T>().Where(specification.toExpression()).SingleOrDefault();
+      return await this.unitOfWork.Contexto.Set<T>().Where(specification.toExpression()).SingleOrDefaultAsync();
     }
 
-    public IEnumerable<T> ListBySpecfication(ISpecification<T> specification)
+    public async Task<IEnumerable<T>> ListBySpecfication(ISpecification<T> specification)
     {
-      return this.unitOfWork.Contexto.Set<T>().Where(specification.toExpression()).ToList();
+      return await this.unitOfWork.Contexto.Set<T>().Where(specification.toExpression()).ToListAsync();
     }
 
-    public void Update(T entity)
+    public async Task Update(T entity)
     {
       this.unitOfWork.Contexto.Entry(entity).State = EntityState.Modified;
-      this.unitOfWork.Commit();
+      await this.unitOfWork.Commit();
     }
   }
 }
